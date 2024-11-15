@@ -14,6 +14,8 @@ const formularioLogin=(req,res)=>{
 
 }
 
+
+
 const autenticar=async(req,res)=>{
     
     //Validación
@@ -72,6 +74,11 @@ const autenticar=async(req,res)=>{
     }).redirect('/mis-propiedades');
 
     
+}
+
+const cerrarSesion=(req,res)=>{
+    
+    return res.clearCookie('_token').status(200).redirect('/auth/login')
 }
 
 //Función que renderiza el formulario
@@ -307,5 +314,6 @@ export {formularioLogin,
         resetPassword,
         comprobarToken,
         nuevoPassword,
-        autenticar
+        autenticar,
+        cerrarSesion
         };

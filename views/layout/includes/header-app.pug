@@ -1,15 +1,28 @@
-header(class="bg-indigo-600 p-4")
-    div(class="container mx-auto flex justify-between items-center")
-        a(href="/")  
-            h1(class="text-2xl text-white font-extrabold text-center") Bienes
-                span(class="font-normal") Raíces
+header.bg-blue-600.p-4
+    .container.mx-auto.flex.justify-between.items-center
+        h1
+            a(href="/").text-2xl.text-white.font-extrabold.text-center Bienes
+                span.font-normal Raices
+ 
+        button(class="block md:hidden text-white", id="menuBtn")
+            svg(width="24" height="24", fill="none", viewBox="0 0 24 24", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                path(d="M4 6h16M4 12h16m-7 6h7", class="w-6 h-6")
+ 
+        nav(class="hidden my-5 md:flex md:items-center md:gap-3 font-bold text-white")
+            a(href="/mis-propiedades") Mis Propiedades
+ 
+            form(action="/auth/cerrar-sesion", method="post")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                input(type="submit" class="bg-blue-800 py-2 px-10 rounded-lg hover:bg-blue-900" value="Cerrar Sesión")    
+        nav(class="hidden md:hidden mt-5 p-5 flex-col gap-4 border-t-2 items-center font-bold text-white" id="menuItems")
+            a(href="/mis-propiedades") Mis Propiedades
+ 
+            form(action="/auth/cerrar-sesion", method="post")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                input(type="submit" class="bg-blue-800 py-2 px-10 rounded-lg hover:bg-blue-900" value="Cerrar Sesión")         
 
-        nav(class="my-5 text-sm md:flex md:items-center md:gap-3 font-bold text-white hidden")
-            a(href="/auth/registro" class="hover:text-green-500") Crear Cuenta      
-            a(href="/auth/login" class="hover:text-green-500") Iniciar Sesión      
-
-div(class="bg-indigo-700 py-5 hidden lg:block")
-    div(class="container mx-auto flex justify-between")
+div(class="bg-indigo-700 py-5 lg:block")
+    div(class="flex flex-col gap-8 px-1 md:container mx-auto md:flex-row md:justify-between")
         nav(class="flex gap-4 items-center")
             a(href="/categorias/1" class="text-sm font-bold uppercase text-white") Casas
             a(href="/categorias/2" class="text-sm font-bold uppercase text-white") Departamentos
@@ -21,3 +34,22 @@ div(class="bg-indigo-700 py-5 hidden lg:block")
             label(for="termino" class="text-sm uppercase font-bold text-white") Busqueda 
             input(type="text" id="termino" name="termino" placeholder="Buscar propiedades" class="p-2 rounded-lg shadow outline-none text-sm")
             input(type="submit" class="bg-indigo-800 rounded-lg text-white uppercase font-bold p-3 hover:bg-indigo-400 cursor-pointer text-sm" value="Buscar") 
+
+script.
+    const menuBtn = document.getElementById("menuBtn");
+ 
+    if (menuBtn) {
+        menuBtn.addEventListener("click", function() {
+            const menu = document.getElementById("menuItems");
+ 
+            if (menu) {
+                if (menu.classList.contains("hidden")){
+                    menu.classList.add("flex")
+                    menu.classList.remove("hidden")
+                } else {
+                    menu.classList.add("hidden");
+                    menu.classList.remove("flex");
+                }
+            }            
+        });
+    }
